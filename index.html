@@ -16,9 +16,7 @@
     <script>
       let lista = "";
 
-      function cadastrar(event) { 
-        event.preventDefault(); // Impede o reload da página
-
+      function cadastrar() { 
         let elNome = document.getElementById("nome");
         let elTelefone = document.getElementById("telefone");
         let elData = document.getElementById("dataDeNascimento");
@@ -37,9 +35,17 @@
           
           document.getElementById("lista").innerHTML = lista;
 
-          document.getElementById("formCadastro").reset();
+          // Limpa os campos
+          elNome.value = "";
+          elTelefone.value = "";
+          elData.value = "";
+          elNota.value = "";
         } else {
-          document.getElementById("formCadastro").reportValidity();
+          // Exibe o aviso do campo inválido no navegador
+          if (!elNome.checkValidity()) elNome.reportValidity();
+          else if (!elTelefone.checkValidity()) elTelefone.reportValidity();
+          else if (!elData.checkValidity()) elData.reportValidity();
+          else if (!elNota.checkValidity()) elNota.reportValidity();
         }
       }
     </script>
@@ -54,30 +60,31 @@
   
     <h4 class="mb-3 mt-5">Cadastro de Alunos</h4>
 
-    <form id="formCadastro" onsubmit="cadastrar(event)">
+    <!-- Removido o atributo action e onsubmit do form para evitar o reload da página -->
+    <form onsubmit="return false;">
       <div style="width:75%; float:left">
-        <div class="row col-lg-8">
+        <div class="row col-lg-8 mb-2">
           <div class="col">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" class="form-control" id="nome" placeholder="Seu Nome" required> 
           </div>
         </div>
 
-        <div class="row col-lg-8">
+        <div class="row col-lg-8 mb-2">
           <div class="col">
             <label for="telefone" class="form-label">Celular ou Telefone Fixo</label>
             <input type="text" pattern="\([0-9]{2}\)[0-9]{4,5}-[0-9]{4}$" class="form-control" id="telefone" placeholder="(00)12345-6789/(00)1234-5678" required> 
           </div>
         </div>
 
-        <div class="row col-lg-8">
+        <div class="row col-lg-8 mb-2">
           <div class="col">
             <label for="dataDeNascimento" class="form-label">Data de Nascimento</label>
             <input type="date" min="1900-01-01" max="2026-12-31" class="form-control" id="dataDeNascimento" required>
           </div>
         </div>
 
-        <div class="row col-lg-8">
+        <div class="row col-lg-8 mb-2">
           <div class="col">
             <label for="notaFinal" class="form-label">Nota final</label>
             <input type="number" min="0" max="10" class="form-control" id="notaFinal" placeholder="De 0 a 10 (números inteiros)" required>
@@ -87,13 +94,14 @@
 
         <div class="row col-lg-8"> 
           <div class="col">
-            <button class="w-100 btn btn-primary btn-lg" type="submit">Finalizar Cadastro</button>
+            <!-- Botão com type="button" que só executa a função sem dar reload -->
+            <button class="w-100 btn btn-primary btn-lg" type="button" onclick="cadastrar()">Finalizar Cadastro</button>
           </div>
         </div>
         <br><br>
 
         <div class="row">
-          <div class="col"><p><h4>Lista de Alunos</h4></p></div>
+          <div class="col"><h4>Lista de Alunos</h4></div>
         </div>
         <div class="row">
           <div class="col" id="lista"></div>  
