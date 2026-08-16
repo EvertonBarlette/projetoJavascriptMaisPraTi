@@ -3,111 +3,120 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="Everton Jauer Barlette" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
     <title>Projeto Javascript</title>
 
-    <!-- Código CSS Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
+
+    
+
+    <!-- Código  CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <style>
-      body { background-color: #cccccc; }
-      div { background-color: #cccccc; }
-    </style>
+      body{background-color:#cccccc;}
+      div {background-color:#cccccc;}
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
 
-    <script>
-      let lista = "";
-
-      function cadastrar() { 
-        let elNome = document.getElementById("nome");
-        let elTelefone = document.getElementById("telefone");
-        let elData = document.getElementById("dataDeNascimento");
-        let elNota = document.getElementById("notaFinal");
-
-        if (elNome.checkValidity() && elTelefone.checkValidity() && elData.checkValidity() && elNota.checkValidity()) {
-          let nome = elNome.value;
-          let telefone = elTelefone.value;
-          
-          let partesData = elData.value.split("-");
-          let dataNascimento = `${partesData[2]}/${partesData[1]}/${partesData[0]}`;
-          
-          let notaFinal = parseInt(elNota.value);
-
-          lista += "<p><h6>Nome: " + nome + "<br> Telefone: " + telefone + "<br> Data de Nascimento: " + dataNascimento + "<br> Nota Final: " + notaFinal + "</h6><br></p>";
-          
-          document.getElementById("lista").innerHTML = lista;
-
-          // Limpa os campos
-          elNome.value = "";
-          elTelefone.value = "";
-          elData.value = "";
-          elNota.value = "";
-        } else {
-          // Exibe o aviso do campo inválido no navegador
-          if (!elNome.checkValidity()) elNome.reportValidity();
-          else if (!elTelefone.checkValidity()) elTelefone.reportValidity();
-          else if (!elData.checkValidity()) elData.reportValidity();
-          else if (!elNota.checkValidity()) elNota.reportValidity();
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
         }
       }
+    </style>
+
+    
+    <!-- Estilos costumizados para o template -->
+   
+
+    <script>
+      let lista ="";
+
+      function cadastrar()
+      { 
+        if((nome.checkValidity())&&(telefone.checkValidity())&&(dataDeNascimento.checkValidity())&&(notaFinal.checkValidity()))
+        {
+        let nome = document.getElementById("nome").value;
+        let telefone = document.getElementById("telefone").value;
+        let data = new Date(document.getElementById("dataDeNascimento").value);
+        let dataNascimento = ((data.getDate()+1)) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear(); 
+        let notaFinal = parseInt(document.getElementById("notaFinal").value);
+         
+          lista += "<p><h6>Nome: "+nome+"<br> Telefone: "+telefone+"<br> Data de Nascimento: "+dataNascimento+"<br> Nota Final: "+notaFinal+"</h6><br></P>";
+            document.getElementById("lista").innerHTML = lista;
+            
+          }
+          else
+          {
+            document.getElementById("lista").innerHTML = lista;
+          }
+      }
+        
+
     </script>
   </head>
   <body>
     
 <div class="container-md">
   <main>
+
     <div style="width:25%; float:right;">
-      <img class="d-block mx-auto mb-4" src="assets/brand/logo_azul.png" alt="Logo" width="72" height="57">
+      <img class="d-block mx-auto mb-4" src="assets/brand/logo_azul.png" alt="20" width="72" height="57">
+      
     </div>
   
-    <h4 class="mb-3 mt-5">Cadastro de Alunos</h4>
-
-    <!-- Removido o atributo action e onsubmit do form para evitar o reload da página -->
-    <form onsubmit="return false;">
-      <div style="width:75%; float:left">
-        <div class="row col-lg-8 mb-2">
-          <div class="col">
-            <label for="nome" class="form-label">Nome</label>
-            <input type="text" pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" class="form-control" id="nome" placeholder="Seu Nome" required> 
+      
+        <h4 class="mb-3 mt-5">Cadastro de Alunos</h4>
+      <form action="#">
+        <div style="width:75%;float:left">
+          <div class="row col-lg-8">
+            <div class="col">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+" class="form-control" id="nome" placeholder="Seu Nome" required> 
+            </div>
+                 
           </div>
-        </div>
-
-        <div class="row col-lg-8 mb-2">
-          <div class="col">
-            <label for="telefone" class="form-label">Celular ou Telefone Fixo</label>
-            <input type="text" pattern="\([0-9]{2}\)[0-9]{4,5}-[0-9]{4}$" class="form-control" id="telefone" placeholder="(00)12345-6789/(00)1234-5678" required> 
+          <div class="row col-lg-8">
+            <div class="col">
+                <label for="telefone" class="form-label">Celular ou Telefone Fixo</label>
+                <input type="text"  pattern="\([0-9]{2}\)[0-9]{4,5}-[0-9]{4}$" class="form-control" id="telefone" placeholder="(00)12345-6789/(00)1234-5678" required> 
+            </div>
           </div>
-        </div>
-
-        <div class="row col-lg-8 mb-2">
-          <div class="col">
-            <label for="dataDeNascimento" class="form-label">Data de Nascimento</label>
-            <input type="date" min="1900-01-01" max="2026-12-31" class="form-control" id="dataDeNascimento" required>
+          <div class="row col-lg-8">
+             <div class="col">
+                <label for="dataDeNascimento" class="form-label">Data de Nascimento</label>
+                <input type="date"min="1900-01-01" max="2022-12-31"class="form-control" id="dataDeNascimento" required>
+              </div>
           </div>
-        </div>
-
-        <div class="row col-lg-8 mb-2">
-          <div class="col">
-            <label for="notaFinal" class="form-label">Nota final</label>
-            <input type="number" min="0" max="10" class="form-control" id="notaFinal" placeholder="De 0 a 10 (números inteiros)" required>
+          <div class="row col-lg-8">
+             <div class="col">
+                <label for="notaFinal" class="form-label">Nota final</label>
+                <input type="number" min="0" max="10"class="form-control" id="notaFinal" placeholder="De 0 a 10 (números inteiros)" required>
+             </div>
           </div>
-        </div>
-        <br>
-
-        <div class="row col-lg-8"> 
-          <div class="col">
-            <!-- Botão com type="button" que só executa a função sem dar reload -->
-            <button class="w-100 btn btn-primary btn-lg" type="button" onclick="cadastrar()">Finalizar Cadastro</button>
+           <br>
+          <div class="row col-lg-8"> 
+             <div class="col">
+               <button class=" w-100 btn btn-primary btn-lg " onclick="cadastrar()"type="submit">Finalizar Cadastro</button>
+             </div>
           </div>
-        </div>
-        <br><br>
-
-        <div class="row">
-          <div class="col"><h4>Lista de Alunos</h4></div>
-        </div>
-        <div class="row">
-          <div class="col" id="lista"></div>  
-        </div>
-      </div>   
-    </form>  
+            <br><br>
+          <div class="row">
+            <div class="col"><p><h4>Lista de Alunos</h4></p></div>
+          </div>
+          <div class="row">
+            <div class="col" id="lista"></div>  
+          </div>
+        </div>   
+      </form>  
   </main>
 </div>
   </body>
