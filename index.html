@@ -37,31 +37,57 @@
     <!-- Estilos costumizados para o template -->
    
 
-    <script>
-      let lista ="";
+   <script>
+  let lista = "";
 
-      function cadastrar()
-      { 
-        if((nome.checkValidity())&&(telefone.checkValidity())&&(dataDeNascimento.checkValidity())&&(notaFinal.checkValidity()))
-        {
-        let nome = document.getElementById("nome").value;
-        let telefone = document.getElementById("telefone").value;
-        let data = new Date(document.getElementById("dataDeNascimento").value);
-        let dataNascimento = ((data.getDate()+1)) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear(); 
-        let notaFinal = parseInt(document.getElementById("notaFinal").value);
-         
-          lista += "<p><h6>Nome: "+nome+"<br> Telefone: "+telefone+"<br> Data de Nascimento: "+dataNascimento+"<br> Nota Final: "+notaFinal+"</h6><br></P>";
-            document.getElementById("lista").innerHTML = lista;
-            
-          }
-          else
-          {
-            document.getElementById("lista").innerHTML = lista;
-          }
-      }
-        
+  function cadastrar() {
+    let elNome = document.getElementById("nome");
+    let elTelefone = document.getElementById("telefone");
+    let elData = document.getElementById("dataDeNascimento");
+    let elNota = document.getElementById("notaFinal");
 
-    </script>
+    if (elNome.checkValidity() && elTelefone.checkValidity() && elData.checkValidity() && elNota.checkValidity()) {
+      
+      let nome = elNome.value;
+      let telefone = elTelefone.value;
+      let notaFinal = parseInt(elNota.value);
+
+      let partesData = elData.value.split("-");
+      let dataNascimento = `${partesData[2]}/${partesData[1]}/${partesData[0]}`;
+
+      // 1. Atualiza a interface
+      lista += `<p><strong>Nome:</strong> ${nome}<br> 
+                <strong>Telefone:</strong> ${telefone}<br> 
+                <strong>Data de Nascimento:</strong> ${dataNascimento}<br> 
+                <strong>Nota Final:</strong> ${notaFinal}</p><hr>`;
+
+      document.getElementById("lista").innerHTML = lista;
+
+      // 2. Cria o objeto do novo aluno/pessoa
+      let novoCadastro = {
+        nome: nome,
+        telefone: telefone,
+        dataNascimento: dataNascimento,
+        notaFinal: notaFinal
+      };
+
+      // 3. Limpa os campos
+      elNome.value = "";
+      elTelefone.value = "";
+      elData.value = "";
+      elNota.value = "";
+
+      // Retorna o objeto cadastrado com sucesso
+      return novoCadastro;
+
+    } else {
+      alert("Por favor, preencha todos os campos corretamente.");
+      
+      // Retorna null para indicar falha/validação incorreta
+      return null; 
+    }
+  }
+</script>
   </head>
   <body>
     
